@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<ul>
+		{% for item in juegos %}
+			<li>{{ item.getId }} : {{ item.getIdBgg  }} </li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
+
