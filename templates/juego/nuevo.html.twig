@@ -3,9 +3,8 @@
 
 <div class="row">
 	<div class="col-md-9">
-		<form name="nuevo_juego" action="">
+		<form name="nuevo_juego" action="/" method="POST">
 			<div class="form-group row">
-
 				<label for="search-game-input" class="col-sm-2 col-form-label">Buscar juego</label>
 				<div class="col-md-9">
 					<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego"></input>
@@ -14,7 +13,7 @@
 				<label for="search-game-select" class="col-sm-2 col-form-label">Elegir resultado</label>
 				<div class="col-md-9">
 					<select class="form-control" id="search-game-select"></select>
-					<input type="submit" />
+					<input type="submit" value="Seleccionar" id="select-game-btn" class="btn btn-primary btn-lg btn-block disabled" disabled="disabled"></input>
 				</div>
 			</div>
 		</form>
@@ -44,6 +43,7 @@
 
 
 		function doSearchQuery(){
+			$('#select-game-btn').addClass('disabled').prop("disabled", "diasbled");
 			$.get('/BGGAPI/searchByName/' + val, function(data, status){
 			}).done(function(data, status){
 				response = $.parseJSON(JSON.stringify(data));
@@ -55,7 +55,7 @@
 			});
 		}
 	
-		// Poblar info del juego en vista previa
+		// Poblar info del juego en vista previa y habilitar botón
 		$('#search-game-select').on('change', function() {
 			var id = this.value;
 			$.get('/BGGAPI/getById/' + this.value, function(data, status){
@@ -70,8 +70,8 @@
 					response.boardgame.minplaytime,
 					response.boardgame.maxplaytime
 				);
-				console.log(description);
 				$('#found-game-description').html(description);
+				$('#select-game-btn').removeClass('disabled').prop("disabled", false);
 
 			});
 		})
@@ -84,7 +84,7 @@
 		'<b>Edad recomendada:</b> '  + (typeof age != 'undefined' ? age : '?') + '</br>' + 
 		'<b>Duración: </b>' + 
 		(minplaytime == maxplaytime ? minplaytime : minplaytime + ' - ' + maxplaytime) + ' mins </br>' +
-		'<a href="http://boardgamegeek.com/boardgame/' + bgg_id + '" target="_blank">Ficha en boardgamegeek</a>'
+		'<a href="http://boardgamegeek.com/boardgame/' + bgg_id + '" target="_blank" class="btn btn-primary center">Ficha en boardgamegeek</a>'
 		;
 	}
 
