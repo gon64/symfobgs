@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="row">
+	<div class="col-md-9">
+		<form name="nuevo_juego" action="">
+			<div class="form-group row">
+
+				<label for="search-game-input" class="col-sm-2 col-form-label">Buscar juego</label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego"></input>
+				</div>
+
+				<label for="search-game-select" class="col-sm-2 col-form-label">Elegir resultado</label>
+				<div class="col-md-9">
+					<select class="form-control" id="search-game-select"></select>
+					<input type="submit" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-3">
+		<div class="card" style="width: 100%">
+			<img class="card-img-top" id="found-game-img" src="{{ asset('img/blank.png') }}" alt="Card image cap" style="width:100%;">
+			<div class="card-body">
+				<p class="card-text" id="found-game-description"></p>
+			</div>
+		</div>
+	</div>
+</div>
+<script language="JavaScript" type="text/javascript">
+	$(document).ready(function(){
+
+		var timeoutID = null;
+
+		// Obtener y procesar resultados
+		$('#search-game-input').keyup(function(){
+			clearTimeout(timeoutID);
+			val = $('#search-game-input').val();
+			if (val.length > 3 ) {
+				timeoutID = setTimeout(() => doSearchQuery(), 300);
+			}
+		});
+
+
+		function doSearchQuery(){
+			$.get('/BGGAPI/searchByName/' + val, function(data, status){
+			}).done(function(data, status){
+				response = $.parseJSON(JSON.stringify(data));
+				$('#search-game-select option').remove();
+				$('#search-game-select').append('<option selected="true" disabled="disabled">Resultados: ' + response.boardgame.length + '</option>');
+				if (response.boardgame.length < 100) $.each(response.boardgame, function(){
+					$('#search-game-select').append("<option value='" + this['@attributes'].objectid + "'>" + this.name + "</option>");
+				});
+			});
+		}
+	
+		// Poblar info del juego en vista previa
+		$('#search-game-select').on('change', function() {
+			var id = this.value;
+			$.get('/BGGAPI/getById/' + this.value, function(data, status){
+				response = $.parseJSON(JSON.stringify(data));
+				$('#found-game-img').attr("src",response.boardgame.image);
+				description = makeDescription(
+					id,
+					response.boardgame.yearpublished,
+					response.boardgame.minplayers,
+					response.boardgame.maxplayers,
+					response.boardgame.age,
+					response.boardgame.minplaytime,
+					response.boardgame.maxplaytime
+				);
+				console.log(description);
+				$('#found-game-description').html(description);
+
+			});
+		})
+	});
+
+	function makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,minplaytime,maxplaytime,age){
+		return '<b>Publicado en</b> ' + yearpublished + '</br>' +
+		'<b>Jugadores:</b> ' +  
+		(minplayers == maxplayers ? minplayers : minplayers + ' - ' + maxplayers) + '</br>' +
+		'<b>Edad recomendada:</b> '  + (typeof age != 'undefined' ? age : '?') + '</br>' + 
+		'<b>Duración: </b>' + 
+		(minplaytime == maxplaytime ? minplaytime : minplaytime + ' - ' + maxplaytime) + ' mins </br>' +
+		'<a href="http://boardgamegeek.com/boardgame/' + bgg_id + '" target="_blank">Ficha en boardgamegeek</a>'
+		;
+	}
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
