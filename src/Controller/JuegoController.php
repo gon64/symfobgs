@@ -5,7 +5,8 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use \App\Entity\Juego;
+use App\Controller\OfferController;
+use App\Entity\Juego;
 
 
 class JuegoController extends Controller
@@ -45,6 +46,35 @@ class JuegoController extends Controller
                         array(
                                 'controller_name' => 'nombre de controlador',
                 ));
+	}
+
+	/**
+	 * @Route("/juego/guardar")
+	 */
+	public function guardarAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+
+		$juego = $this->getDoctrine()
+  		        ->getRepository(Juego::class)
+ 			->findOneBy([
+				'id_bgg' => $request->request->get('bgg_id')
+			]);
+
+		if (!$juego) {
+			$juego = new Juego();
+			$juego->setIdBgg($request->request->get('bgg_id'));
+			$juego->setUrlPortada($request->request->get('img_url'));
+
+			$em->persist($juego);
+			$em->flush();
+		}
+
+		return $this->render(
+                        'offer/nuevo.html.twig',
+                        array(
+                                'juego' => $juego
+                        )
+                );
 	}
 
 	/**

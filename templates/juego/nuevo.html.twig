@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
 <div class="row">
 	<div class="col-md-9">
-		<form name="nuevo_juego" action="/" method="POST">
+		<form name="nuevo_juego" action="/juego/guardar" method="post">
 			<div class="form-group row">
 				<label for="search-game-input" class="col-sm-2 col-form-label">Buscar juego</label>
 				<div class="col-md-9">
-					<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego"></input>
+					<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego" autocomplete="off"></input>
 				</div>
 
 				<label for="search-game-select" class="col-sm-2 col-form-label">Elegir resultado</label>
@@ -16,6 +15,9 @@
 					<input type="submit" value="Seleccionar" id="select-game-btn" class="btn btn-primary btn-lg btn-block disabled" disabled="disabled"></input>
 				</div>
 			</div>
+			<input type="hidden" name="bgg_id" id="bgg_id" />
+			<input type="hidden" name="img_url" id="img_url" />
+			<input type="hidden" name="bg_name" id="bg_name" />
 		</form>
 	</div>
 	<div class="col-md-3">
@@ -49,7 +51,7 @@
 				response = $.parseJSON(JSON.stringify(data));
 				$('#search-game-select option').remove();
 				$('#search-game-select').append('<option selected="true" disabled="disabled">Resultados: ' + response.boardgame.length + '</option>');
-				if (response.boardgame.length < 100) $.each(response.boardgame, function(){
+				if (response.boardgame.length < 1000) $.each(response.boardgame, function(){
 					$('#search-game-select').append("<option value='" + this['@attributes'].objectid + "'>" + this.name + "</option>");
 				});
 			});
@@ -72,6 +74,11 @@
 				);
 				$('#found-game-description').html(description);
 				$('#select-game-btn').removeClass('disabled').prop("disabled", false);
+				console.log(id, response.boardgame.image, $('#search-game-select').val());
+				$('#bgg_id').val(id);
+				$('#img_url').val(response.boardgame.image);
+				$('#bg_name').val($('#search-game-select:selected').text());
+
 
 			});
 		})

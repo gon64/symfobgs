@@ -3,23 +3,22 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Propuesta;
+use App\Entity\Juego;
 
 
-class OfferController extends Controller
-{
-    /**
-     * @Route("/offer", name="offer")
-     */
-    public function index()
-    {
+class OfferController extends AbstractController {
+	/**
+	 * @Route("/offer", name="offer")
+	 */
+	public function index() {
 		return $this->listAll();
-    }
+	}
 
 	/**
-     * @Route("/offer/listAll", name="offer")
-     */
+	 * @Route("/offer/listAll", name="offer")
+	 */
 	public function listAllAction(){
 
 		$offers = $this->getDoctrine()->getRepository('App\Entity\Propuesta')->findAll();
@@ -28,17 +27,22 @@ class OfferController extends Controller
 		return $this->render(
 			'offer/index.html.twig',
 			array('controller_name' => 'controlador')
-//			array('offers' => $offers)
 		);
 	}
 
-
-	public function createOneAction(){
-		$repository = $this->getDoctrine()->getRepository('App\Entity\Propuesta');
-
-		$propuesta = new Propuesta;
-
-		//$repository
+	/**
+	 * @Route("offer/makeNew")
+	 */
+	public function createOneAction(Juego $juego){
+		var_dump($juego->getIdBgg());
+		$id_bgg = $juego->getIdBgg();
+		return $this->render(
+			'offer/nuevo.html.twig',
+			array(
+//				'controller_name' => 'nombre de controlador',
+				'controller_name' => $id_bgg
+			)	
+		);
 	}	
 
 }

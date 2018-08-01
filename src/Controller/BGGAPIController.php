@@ -18,7 +18,7 @@ class BGGAPIController extends Controller {
 	 * @Route("BGGAPI/searchByName/{name}")
 	 */
 	public function searchByName($name){
-	    	$url = "https://boardgamegeek.com/xmlapi/search?search=$name";
+	    $url = "https://boardgamegeek.com/xmlapi/search?search=$name";
 		$xml = simplexml_load_file($url);
 		$json = json_encode($xml);
 		$array = json_decode($json,true);
