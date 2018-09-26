@@ -37,6 +37,7 @@ class BGGAPIController extends Controller {
 
 		// $x("boardgames/boardgame/name[@primary]")[0].innerHTML
 
+		$em = $this->getDoctrine()->getManager();
 		$titulo = ((string) $xml->xpath("/boardgames/boardgame/name[@primary]")[0]);
 		$image = ((string) $xml->xpath("/boardgames/boardgame/image")[0]);
 		$yearpublished = ((int) $xml->xpath("/boardgames/boardgame/yearpublished")[0]);
@@ -44,6 +45,35 @@ class BGGAPIController extends Controller {
 		$maxplayers = ((int) $xml->xpath("/boardgames/boardgame/maxplayers")[0]);
 		$playingtime = ((int) $xml->xpath("/boardgames/boardgame/playingtime")[0]);
 		$age = ((int) $xml->xpath("/boardgames/boardgame/age")[0]);
+
+/*
+var_dump($playingtime);
+var_dump($age);
+die;
+*/
+
+                $juego = $this->getDoctrine()
+                        ->getRepository(Juego::class)
+                        ->findOneBy([
+                                'id_bgg' => $id
+			]);
+
+		if (!$juego) {
+                        $juego = new Juego();
+                        $juego->setIdBgg($id);
+			$juego->setUrlPortada($image);
+			$juego->setTitulo($titulo);
+			$juego->setYearpublished($yearpublished);
+			$juego->setMinplayers($minplayers);
+			$juego->setMaxplayers($maxplayers);
+			$juego->setAge($age);
+			$juego->setPlayingtime($playingtime);
+
+                        $em->persist($juego);
+                        $em->flush();
+                }
+
+
 /*
 		echo $image;
 		die;

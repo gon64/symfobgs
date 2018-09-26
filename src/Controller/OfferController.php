@@ -34,7 +34,7 @@ class OfferController extends AbstractController {
 	 * @Route("offer/makeNew")
 	 */
 	public function createOneAction(Juego $juego){
-		var_dump($juego->getIdBgg());
+//		var_dump($juego->getIdBgg());
 		$id_bgg = $juego->getIdBgg();
 		return $this->render(
 			'offer/nuevo.html.twig',
