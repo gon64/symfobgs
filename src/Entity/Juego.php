@@ -31,6 +31,31 @@ class Juego
      */
     private $titulo;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $yearpublished;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $minplayers;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxplayers;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $playingtime;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $age;
+
     public function getId()
     {
         return $this->id;
@@ -68,6 +93,66 @@ class Juego
     public function setTitulo(string $titulo): self
     {
         $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    public function getYearpublished(): ?int
+    {
+        return $this->yearpublished;
+    }
+
+    public function setYearpublished(?int $yearpublished): self
+    {
+        $this->yearpublished = $yearpublished;
+
+        return $this;
+    }
+
+    public function getMinplayers(): ?int
+    {
+        return $this->minplayers;
+    }
+
+    public function setMinplayers(?int $minplayers): self
+    {
+        $this->minplayers = $minplayers;
+
+        return $this;
+    }
+
+    public function getMaxplayers(): ?int
+    {
+        return $this->maxplayers;
+    }
+
+    public function setMaxplayers(?int $maxplayers): self
+    {
+        $this->maxplayers = $maxplayers;
+
+        return $this;
+    }
+
+    public function getPlayingtime(): ?int
+    {
+        return $this->playingtime;
+    }
+
+    public function setPlayingtime(?int $playingtime): self
+    {
+        $this->playingtime = $playingtime;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(?int $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }
