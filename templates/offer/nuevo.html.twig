@@ -17,39 +17,10 @@
 		</form>
         </div>
         <div class="col-md-3">
-                <div class="card" style="width: 100%">
-                        <img class="card-img-top" id="found-game-img" src="{{ juego.getUrlPortada  }}" alt="Card image cap" style="width:100%;">
-                        <div class="card-body">
-                                <p class="card-text" id="found-game-description"></p>
-                        </div>
-                </div>
+		{% include 'juego/infocard.html.twig' %}
         </div>
 </div>
-<script src="{{ asset('js/oferta.js') }}" type='text/javascript'></script>
-<script>
-	var id = this.value;
-	$.get('/BGGAPI/getById/' + {{ juego.getIdBgg  }}, function(data, status){
-		response = $.parseJSON(JSON.stringify(data));
-		$('#found-game-img').attr("src",response.boardgame.image);
-		description = makeDescription(
-			id,
-			response.boardgame.yearpublished,
-			response.boardgame.minplayers,
-			response.boardgame.maxplayers,
-			response.boardgame.age,
-			response.boardgame.minplaytime,
-			response.boardgame.maxplaytime
-		);
-		$('#found-game-description').html(description);
-		$('#select-game-btn').removeClass('disabled').prop("disabled", false);
-		console.log(id, response.boardgame.image, $('#search-game-select').val());
-		$('#bgg_id').val(id);
-		$('#img_url').val(response.boardgame.image);
-		$('#bg_name').val($('#search-game-select:selected').text());
-
-
-	});
-</script>
+<script src="{{ asset('js/juego.js') }}" type="text/javascript"></script>
 {% endblock %}
 
 

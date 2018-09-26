@@ -21,15 +21,9 @@
 		</form>
 	</div>
 	<div class="col-md-3">
-		<div class="card" style="width: 100%">
-			<img class="card-img-top" id="found-game-img" src="{{ asset('img/blank.png') }}" alt="Card image cap" style="width:100%;">
-			<div class="card-body">
-				<p class="card-text" id="found-game-description"></p>
-			</div>
-		</div>
+		{% include 'juego/infocard.html.twig' %}
 	</div>
 </div>
-<script src="{{ asset('js/oferta.js') }}" type='text/javascript'></script>
 <script src="{{ asset('js/juego.js') }}" type="text/javascript"></script>
 
 

@@ -1,3 +1,13 @@
+function makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,playingtime){
+        return '<b>Publicado en</b> ' + yearpublished + '</br>' +
+        '<b>Jugadores:</b> ' +
+        (minplayers == maxplayers ? minplayers : minplayers + ' - ' + maxplayers) + '</br>' +
+        '<b>Edad recomendada:</b> '  + age + '</br>' +
+        '<b>Duracion: </b>' + playingtime + ' mins </br>' +
+        '<a href="http://boardgamegeek.com/boardgame/' + bgg_id + '" target="_blank" class="btn btn-primary center">Ficha en boardgamegeek</a>'
+        ;
+}
+
 $(document).ready(function(){
 
 	var timeoutID = null;
@@ -31,22 +41,23 @@ $(document).ready(function(){
 		$.get('/BGGAPI/getById/' + this.value, function(data, status){
 			response = $.parseJSON(JSON.stringify(data));
 
+			$('#found-game-img').attr("src",response.urlPortada);
 
-			$('#found-game-img').attr("src",response.boardgame.image);
+			// makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,minplaytime,maxplaytime)
+			//
 			description = makeDescription(
 				id,
-				response.boardgame.yearpublished,
-				response.boardgame.minplayers,
-				response.boardgame.maxplayers,
-				response.boardgame.age,
-				response.boardgame.minplaytime,
-				response.boardgame.maxplaytime
+				response.yearpublished,
+				response.minplayers,
+				response.maxplayers,
+				response.age,
+				response.playingtime
 			);
 			$('#found-game-description').html(description);
 			$('#select-game-btn').removeClass('disabled').prop("disabled", false);
-			console.log(id, response.boardgame.image, $('#search-game-select').val());
+			console.log(id, response.urlPortada, $('#search-game-select').val());
 			$('#bgg_id').val(id);
-			$('#img_url').val(response.boardgame.image);
+			$('#img_url').val(response.urlPortada);
 			$('#bg_name').val($('#search-game-select:selected').text());
 
 

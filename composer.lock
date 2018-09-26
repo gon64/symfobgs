@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dfc88f643aec25bf15c4131a4428821",
+    "content-hash": "cfaa08607af2272dd72ae7af05936c9f",
     "packages": [
         {
             "name": "components/jquery",
@@ -3394,6 +3394,7 @@
             ],
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
+            "abandoned": "symfony/flex",
             "time": "2018-04-03T05:04:16+00:00"
         },
         {
@@ -4207,16 +4208,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v4.1.1",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "2ddc6ec084eba809aec92bf723e007bc3a8345c0"
+                "reference": "2f134b6cad1cefa0613a4339b08e480124914c85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/2ddc6ec084eba809aec92bf723e007bc3a8345c0",
-                "reference": "2ddc6ec084eba809aec92bf723e007bc3a8345c0",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/2f134b6cad1cefa0613a4339b08e480124914c85",
+                "reference": "2f134b6cad1cefa0613a4339b08e480124914c85",
                 "shasum": ""
             },
             "require": {
@@ -4283,7 +4284,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2018-06-22T08:59:39+00:00"
+            "time": "2018-07-26T09:10:45+00:00"
         },
         {
             "name": "symfony/serializer-pack",

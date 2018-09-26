@@ -59,16 +59,6 @@ class JuegoController extends Controller
  			->findOneBy([
 				'id_bgg' => $request->request->get('bgg_id')
 			]);
-
-		if (!$juego) {
-			$juego = new Juego();
-			$juego->setIdBgg($request->request->get('bgg_id'));
-			$juego->setUrlPortada($request->request->get('img_url'));
-
-			$em->persist($juego);
-			$em->flush();
-		}
-
 		return $this->render(
                         'offer/nuevo.html.twig',
                         array(

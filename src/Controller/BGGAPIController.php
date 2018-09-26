@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use App\Entity\Juego;
 
 class BGGAPIController extends Controller {
@@ -35,6 +38,11 @@ class BGGAPIController extends Controller {
 		$url = "https://www.boardgamegeek.com/xmlapi/boardgame/$id";
 		$xml = simplexml_load_file($url);
 
+		$encoders = array(new JsonEncoder());
+		$normalizers = array(new ObjectNormalizer());
+
+		$serializer = new Serializer($normalizers, $encoders);
+
 		// $x("boardgames/boardgame/name[@primary]")[0].innerHTML
 
 		$em = $this->getDoctrine()->getManager();
@@ -45,12 +53,6 @@ class BGGAPIController extends Controller {
 		$maxplayers = ((int) $xml->xpath("/boardgames/boardgame/maxplayers")[0]);
 		$playingtime = ((int) $xml->xpath("/boardgames/boardgame/playingtime")[0]);
 		$age = ((int) $xml->xpath("/boardgames/boardgame/age")[0]);
-
-/*
-var_dump($playingtime);
-var_dump($age);
-die;
-*/
 
                 $juego = $this->getDoctrine()
                         ->getRepository(Juego::class)
@@ -73,16 +75,31 @@ die;
                         $em->flush();
                 }
 
-
-/*
-		echo $image;
-		die;
- */
-
+		//$jsonContent = $serializer->serialize($juego, 'json');
+		//return $jsonContent;
+		
+		return $this->json($juego);
 
 
-                $json = json_encode($xml);
+
+
+		$json = json_encode($xml);
                 $array = json_decode($json,true);
 		return $this->json($array);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
