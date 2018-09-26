@@ -26,6 +26,11 @@ class Juego
      */
     private $url_portada;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titulo;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Juego
     public function setUrlPortada(?string $url_portada): self
     {
         $this->url_portada = $url_portada;
+
+        return $this;
+    }
+
+    public function getTitulo(): ?string
+    {
+        return $this->titulo;
+    }
+
+    public function setTitulo(string $titulo): self
+    {
+        $this->titulo = $titulo;
 
         return $this;
     }

@@ -18,11 +18,13 @@ class BGGAPIController extends Controller {
 	 * @Route("BGGAPI/searchByName/{name}")
 	 */
 	public function searchByName($name){
-	    $url = "https://boardgamegeek.com/xmlapi/search?search=$name";
+	 	$url = "https://boardgamegeek.com/xmlapi/search?search=$name";
 		$xml = simplexml_load_file($url);
+
 		$json = json_encode($xml);
 		$array = json_decode($json,true);
 		return $this->json($array);
+
 	}
 
 	/**
@@ -31,9 +33,17 @@ class BGGAPIController extends Controller {
 	public function getById($id){
 		$url = "https://www.boardgamegeek.com/xmlapi/boardgame/$id";
 		$xml = simplexml_load_file($url);
+
+		// $x("boardgames/boardgame/name[@primary]")[0].innerHTML
+
+		$titulo = ((string)$xml->xpath("/boardgames/boardgame/name[@primary]")[0]);
+
+
+
+
+
                 $json = json_encode($xml);
                 $array = json_decode($json,true);
 		return $this->json($array);
 	}
-
 }
