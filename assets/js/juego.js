@@ -8,6 +8,45 @@ function makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,playingt
         ;
 }
 
+function poblarInfo(id) {
+	$.get('/BGGAPI/getById/' + id, function(data, status){
+		response = $.parseJSON(JSON.stringify(data));
+
+		$('#found-game-img').attr("src",response.urlPortada);
+
+		// makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,minplaytime,maxplaytime)
+		//
+		description = makeDescription(
+			id,
+			response.yearpublished,
+			response.minplayers,
+			response.maxplayers,
+			response.age,
+			response.playingtime
+		);
+		$('#found-game-description').html(description);
+		$('#select-game-btn').removeClass('disabled').prop("disabled", false);
+		console.log(id, response.urlPortada, $('#search-game-select').val());
+		$('#bgg_id').val(id);
+		$('#img_url').val(response.urlPortada);
+		$('#bg_name').val($('#search-game-select:selected').text());
+	});
+}
+
+function doSearchQuery(){
+                $('#select-game-btn').addClass('disabled').prop("disabled", "diasbled");
+                $.get('/BGGAPI/searchByName/' + val, function(data, status){
+                }).done(function(data, status){
+                        response = $.parseJSON(JSON.stringify(data));
+                        $('#search-game-select option').remove();
+                        $('#search-game-select').append('<option selected="true" disabled="disabled">Resultados: ' + response.boardgame.length + '</option>');
+                        if (response.boardgame.length < 1000) $.each(response.boardgame, function(){
+                                $('#search-game-select').append("<option value='" + this['@attributes'].objectid + "'>" + this.name + "</option>");
+                        });
+                });
+        }
+
+
 $(document).ready(function(){
 
 	var timeoutID = null;
@@ -21,46 +60,8 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#search-game-select').on('change', function(){
+		poblarInfo($('#search-game-select').val());
+	});
 
-	function doSearchQuery(){
-		$('#select-game-btn').addClass('disabled').prop("disabled", "diasbled");
-		$.get('/BGGAPI/searchByName/' + val, function(data, status){
-		}).done(function(data, status){
-			response = $.parseJSON(JSON.stringify(data));
-			$('#search-game-select option').remove();
-			$('#search-game-select').append('<option selected="true" disabled="disabled">Resultados: ' + response.boardgame.length + '</option>');
-			if (response.boardgame.length < 1000) $.each(response.boardgame, function(){
-				$('#search-game-select').append("<option value='" + this['@attributes'].objectid + "'>" + this.name + "</option>");
-			});
-		});
-	}
-
-	// Poblar info del juego en vista previa y habilitar botÃ
-	$('#search-game-select').on('change', function() {
-		var id = this.value;
-		$.get('/BGGAPI/getById/' + this.value, function(data, status){
-			response = $.parseJSON(JSON.stringify(data));
-
-			$('#found-game-img').attr("src",response.urlPortada);
-
-			// makeDescription(bgg_id,yearpublished,minplayers,maxplayers,age,minplaytime,maxplaytime)
-			//
-			description = makeDescription(
-				id,
-				response.yearpublished,
-				response.minplayers,
-				response.maxplayers,
-				response.age,
-				response.playingtime
-			);
-			$('#found-game-description').html(description);
-			$('#select-game-btn').removeClass('disabled').prop("disabled", false);
-			console.log(id, response.urlPortada, $('#search-game-select').val());
-			$('#bgg_id').val(id);
-			$('#img_url').val(response.urlPortada);
-			$('#bg_name').val($('#search-game-select:selected').text());
-
-
-		});
-	})
 });

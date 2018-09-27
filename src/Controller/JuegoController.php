@@ -49,9 +49,9 @@ class JuegoController extends Controller
 	}
 
 	/**
-	 * @Route("/juego/guardar")
+	 * @Route("/juego/nuevaOferta")
 	 */
-	public function guardarAction(Request $request) {
+	public function nuevaOfertaAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 
 		$juego = $this->getDoctrine()

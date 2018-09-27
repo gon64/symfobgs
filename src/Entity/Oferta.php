@@ -38,6 +38,11 @@ class Oferta
      */
     private $usuario;
 
+    /**
+     * @ORM\Column(type="string", length=1255, nullable=true)
+     */
+    private $comentario;
+
     public function getId()
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Oferta
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getComentario(): ?string
+    {
+        return $this->comentario;
+    }
+
+    public function setComentario(?string $comentario): self
+    {
+        $this->comentario = $comentario;
 
         return $this;
     }

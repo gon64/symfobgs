@@ -2,7 +2,7 @@
 {% block body %}
 <div class="row">
         <div class="col-md-9">
-		<h2>TITULO JUEGO</h2>
+		<h2>{{juego.titulo}}</h2>
 		<form>
 			<div class="form-group row">
 				<label for="game-price-input" class="col-sm-2 col-form-label">Precio:</label>
@@ -21,6 +21,12 @@
         </div>
 </div>
 <script src="{{ asset('js/juego.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+	$.getScript('{{ asset('js/juego.js') }}', function () {          
+		poblarInfo({{juego.getIdBgg}});
+	});  
+</script>
+
 {% endblock %}
 
 
