@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  */
-class Usuario
+class Usuario implements UserInterface 
 {
     /**
      * @ORM\Id()
@@ -148,4 +149,35 @@ class Usuario
 
         return $this;
     }
+
+    /*
+     * Metodos de la interfaz UserInterface
+     */
+    public function getPassword()
+    {
+        return $this->clave;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+ 
+    public function getSalt()
+    {
+        return null;
+    }
+ 
+    public function getUsername()
+    {
+        return $this->usuario;
+    }
+ 
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+
+
 }

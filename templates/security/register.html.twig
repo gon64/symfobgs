@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="col-lg-4 col-md-8 col-xs-12 text-center mx-auto">
+    <form class="form-signin" action="/registro" method="POST">
+      <img class="mb-4" src="{{ asset('img/bootstrap-solid.svg') }}" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Registro en BGSS</h1>
+
+      <label for="inputEmail" class="sr-only">Dirección de email</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de email" required="" autofocus="" autocomplete="off" style="">
+
+      <label for="inputUser" class="sr-only">Usuario</label>
+      <input type="text" id="inputUser" class="form-control" placeholder="Usuario" required="" autocomplete="off" style="">
+
+      <label for="inputPassword" class="sr-only">Usuario</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="" autocomplete="off" style="">
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+      <p class="mt-5 mb-3 text-muted">
+        <a href="/login">¿Ya tienes cuenta? ¡Accede!</a>
+      </p>
+      <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+    </form>
+</div>
+{% endblock %}
