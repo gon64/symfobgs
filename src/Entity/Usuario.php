@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  */
-class Usuario implements UserInterface 
+class Usuario implements UserInterface, \Serializable 
 {
     /**
      * @ORM\Id()
@@ -30,12 +30,12 @@ class Usuario implements UserInterface
     private $clave;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $ubicacion;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nombre;
 
@@ -178,6 +178,21 @@ class Usuario implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-
+    public function serialize(){
+	    return serialize([
+		    $this->id,
+		    $this->usuario,
+		    $this->email,
+		    $this->clave
+	    ]);
+    }
+    public function unserialize($string) {
+	    list (
+		    $this->id,
+		    $this->usuario,
+                    $this->email,
+		    $this->clave
+	    ) = unserialize($string, ['allowed_classes' => false]);
+    }
 
 }

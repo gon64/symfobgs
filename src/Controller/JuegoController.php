@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Controller\OfferController;
 use App\Entity\Juego;
-
+use App\Constant\Security;
 
 class JuegoController extends Controller
 {
@@ -43,9 +43,8 @@ class JuegoController extends Controller
  */
 		return $this->render(
                         'juego/nuevo.html.twig',
-                        array(
-                                'controller_name' => 'nombre de controlador',
-                ));
+                        array( 'controller_name' => 'nombre de controlador' )
+		);
 	}
 
 	/**
