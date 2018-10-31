@@ -1,7 +1,6 @@
 security:
     encoders:
         App\Entity\Usuario:
-            #algorithm: md5
             algorithm: bcrypt
             cost: 11
             encode_as_base64: false
@@ -11,7 +10,7 @@ security:
         user_provider:
             entity:
                 class: App\Entity\Usuario
-                property: usuario
+                #                property: usuario
  
     firewalls:
         dev:
