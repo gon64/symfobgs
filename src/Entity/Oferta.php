@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfertaRepository")
@@ -42,6 +43,16 @@ class Oferta
      * @ORM\Column(type="string", length=1255, nullable=true)
      */
     private $comentario;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fecha_creacion;
+
+    public function __construct()
+    {
+        $this->fecha_creacion = new DateTime(); 
+    }
 
     public function getId()
     {
@@ -104,6 +115,18 @@ class Oferta
     public function setComentario(?string $comentario): self
     {
         $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fecha_creacion;
+    }
+
+    public function setFechaCreacion(\DateTimeInterface $fecha_creacion): self
+    {
+        $this->fecha_creacion = $fecha_creacion;
 
         return $this;
     }

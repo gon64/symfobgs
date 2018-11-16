@@ -19,6 +19,12 @@ class OfertaRepository extends ServiceEntityRepository
         parent::__construct($registry, Oferta::class);
     }
 
+    public function findAllOrderByDate(){
+        return $this->createQueryBuilder('p')
+        ->orderBy('p.fecha_creacion', 'DESC')
+        ->getQuery()->execute();
+    }
+
 //    /**
 //     * @return Oferta[] Returns an array of Oferta objects
 //     */

@@ -3,12 +3,13 @@
 <div class="row">
     <div class="col-md-9">
 		<h2>{{ juego.titulo }}</h2>
-		<form action="/oferta/nuevo/2">
+		<form action="/oferta/nuevo/2" method="post">
+			<input type="hidden" name="game-id" value="{{juego.id}}"></input>
 			<div class="form-group row">
 				<label for="game-price-input" class="col-sm-2 col-form-label">Precio:</label>
 				<div class="col-md-9">
 					<div class="input-group">
-						<input type="number" min="0.00" step="0.01" class="form-control" id="game-price-input" placeholder="Precio" autocomplete="off" required="required"></input>
+						<input type="number" name="game-price-input" min="0.00" step="0.01" class="form-control" id="game-price-input" placeholder="Precio" autocomplete="off" required="required"></input>
 						<div class="input-group-append">
 							<span class="input-group-text">€</span>
 						</div>
@@ -16,7 +17,7 @@
 				</div>
 				<label for="game-description-input" class="col-sm-2 col-form-label">Comentarios: </label>
 				<div class="col-md-9">
-					<textarea class="form-control" id="game-description-input" rows="5" placeholder="Comentarios" autocomplete="off" required="required"></textarea>
+					<textarea name="game-description-input" class="form-control" id="game-description-input" rows="5" placeholder="Comentarios" autocomplete="off" required="required"></textarea>
 				</div>
 				
 			</div>
