@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Propuesta;
+//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Oferta;
 use App\Entity\Juego;
 
 
@@ -21,13 +23,44 @@ class OfferController extends AbstractController {
 	 */
 	public function listAllAction(){
 
-		$offers = $this->getDoctrine()->getRepository('App\Entity\Propuesta')->findAll();
+		$offers = $this->getDoctrine()->getRepository('App\Entity\Oferta')->findAll();
 
 
 		return $this->render(
-			'offer/index.html.twig',
-			array('controller_name' => 'controlador')
+			'offer/lista.html.twig',
+			array(
+				'ofertas' => $offers
+				)
 		);
+	}
+
+	/**
+	 * @Route("/oferta/nuevo/{step}")
+	 */
+	public function nuevaOfertaAction(Request $request, $step = 1) {
+		if ( $step == 1 ) {
+			$em = $this->getDoctrine()->getManager();
+
+			$juego = $this->getDoctrine()
+				->getRepository(Juego::class)
+				->findOneBy([
+					'id_bgg' => $request->request->get('bgg_id')
+				]);
+			return $this->render(
+				'offer/nuevo.html.twig',
+				array(
+					'juego' => $juego
+				)
+			);
+		} else {
+			switch ( $step ) {
+				case 2:
+					die ("hello");
+					break;
+				default: 
+					break;
+			}	
+		}
 	}
 
 	/**

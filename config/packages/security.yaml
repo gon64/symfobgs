@@ -23,7 +23,7 @@ security:
                 login_path: login
                 check_path: login
                 provider: user_provider
-                default_target_path: /juego/nuevo
+                default_target_path: /offer/listAll
                 always_use_default_target_path: true
             logout:
                 path: /logout

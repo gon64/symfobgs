@@ -28,7 +28,6 @@ class BGGAPIController extends Controller {
 		$json = json_encode($xml);
 		$array = json_decode($json,true);
 		return $this->json($array);
-
 	}
 
 	/**
@@ -57,12 +56,12 @@ class BGGAPIController extends Controller {
                 $juego = $this->getDoctrine()
                         ->getRepository(Juego::class)
                         ->findOneBy([
-                                'id_bgg' => $id
+                            'id_bgg' => $id
 			]);
 
 		if (!$juego) {
-                        $juego = new Juego();
-                        $juego->setIdBgg($id);
+			$juego = new Juego();
+			$juego->setIdBgg($id);
 			$juego->setUrlPortada($image);
 			$juego->setTitulo($titulo);
 			$juego->setYearpublished($yearpublished);
@@ -71,21 +70,18 @@ class BGGAPIController extends Controller {
 			$juego->setAge($age);
 			$juego->setPlayingtime($playingtime);
 
-                        $em->persist($juego);
-                        $em->flush();
-                }
-
+			$em->persist($juego);
+			$em->flush();
+        }
 		//$jsonContent = $serializer->serialize($juego, 'json');
-		//return $jsonContent;
-		
+		//return $jsonContent;		
 		return $this->json($juego);
 
-
-
-
+		/*
 		$json = json_encode($xml);
                 $array = json_decode($json,true);
 		return $this->json($array);
+		*/
 	}
 }
 
