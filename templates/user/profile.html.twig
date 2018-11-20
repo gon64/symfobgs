@@ -2,13 +2,40 @@
 {% block body %}
     <div class="container">
         <div class="row">
+            <h1>Perfil de {{ usuario.username }}</h1>
+        </div>
+        <div class="row">
             <div class="col col-md-3">
                 <!-- foto --> 
-            </col>
+                <img src="{{ asset('img/blank-profile.png') }}" class="img-thumbnail"></img>
+            </div>
             <div class="col col-md-9">
                 <!-- info --> 
-            </col>
+                <p>email:
+                <p>Usuario desde:
+                <p>Ubicación:
+                <p><button>Cambiar contraseña</button>
+            </div>
         </div>
+        {% if usuario.getOfertas is empty %}
+            <div class="row">
+                <div class="col col-12">
+                    <h2>Aún no tienes ningún juego en venta, <a href="/juego/nuevo">publica una oferta ahora</a> </h2>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col col-12">
+                    <h2>En venta: </h2>
+                </div>
+            </div>
+            {% for oferta in usuario.getOfertas %}
+                {% include 'user/selling.html.twig' %} 
+            {% endfor %}
+        {% endif %}
+        
     </div>
 
 {% endblock %}
+
+

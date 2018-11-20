@@ -8,6 +8,7 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ oferta.juego.titulo }} <span class="badge badge-success">{{ oferta.precio }} €</span> </h3> 
                         <p class="card-text">{{ oferta.getComentario[:50] ~ '...' }}</p>
+                        <p class="card-text small">Publicado el {{ oferta.getFechaCreacion|date('d-m-Y')}} </p>
                         <a href="/user/{{ oferta.usuario.usuario }}" class="btn btn-primary">Contactar con {{ oferta.usuario.usuario }}</a>
                     </div>
                 </div>

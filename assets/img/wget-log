@@ -1,16 +1,0 @@
---2018-07-31 14:15:37--  https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2Fa8d%2F6Bia8dBc8.png
-Resolving images.duckduckgo.com (images.duckduckgo.com)... 79.125.105.113, 176.34.155.23, 46.51.179.90
-Connecting to images.duckduckgo.com (images.duckduckgo.com)|79.125.105.113|:443... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2Fa8d%2F6Bia8dBc8.png [following]
---2018-07-31 14:15:37--  https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2Fa8d%2F6Bia8dBc8.png
-Resolving proxy.duckduckgo.com (proxy.duckduckgo.com)... 79.125.105.117, 54.75.239.212
-Connecting to proxy.duckduckgo.com (proxy.duckduckgo.com)|79.125.105.117|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 89679 (88K) [image/png]
-Saving to: ‘index.html?u=http:%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2Fa8d%2F6Bia8dBc8.png’
-
-                           index.html?u=http:%2F%2Fcli   0%[                                                                                                                             ]       0  --.-KB/s               index.html?u=http:%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2 100%[============================================================================================================================>]  87,58K   550KB/s    in 0,2s    
-
-2018-07-31 14:15:38 (550 KB/s) - ‘index.html?u=http:%2F%2Fcliparts.co%2Fcliparts%2F6Bi%2Fa8d%2F6Bia8dBc8.png’ saved [89679/89679]
-

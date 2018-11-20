@@ -17,11 +17,9 @@ class UserController extends Controller
         } else {
 
             $usuario = $this->getDoctrine()->getRepository('App\Entity\Usuario')->findOneBy(['usuario' => $username]);
+
             return $this->render('user/profile.html.twig', [
-                'controller_name' => 'UserController',
-                array(
                     'usuario' => $usuario
-                )
             ]);
         }
     }
