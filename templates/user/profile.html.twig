@@ -11,12 +11,13 @@
             </div>
             <div class="col col-md-9">
                 <!-- info --> 
-                <p>email:
+                <p>email: <a href="{{ usuario.email }}">{{ usuario.email }}</a>
                 <p>Usuario desde:
                 <p>Ubicación:
-                <p><button>Cambiar contraseña</button>
+                <p><button onclick="window.location.href='/'" type="button" class="btn btn-warning">Cambiar contraseña</button>
             </div>
         </div>
+        <div class="row">
         {% if usuario.getOfertas is empty %}
             <div class="row">
                 <div class="col col-12">
@@ -29,11 +30,21 @@
                     <h2>En venta: </h2>
                 </div>
             </div>
-            {% for oferta in usuario.getOfertas %}
-                {% include 'user/selling.html.twig' %} 
+            
+            
+            {% for ofertas in usuario.getOfertas|batch(3) %}
+                <div class="card-deck" style="margin-bottom:15px">
+                    {% for oferta in ofertas %}
+                        {% include 'user/selling.html.twig' %}
+                        <!--{{ oferta.getComentario }}-->
+                    {% endfor %}
+                    
+                </div>
+                
             {% endfor %}
+            
         {% endif %}
-        
+        </div>
     </div>
 
 {% endblock %}

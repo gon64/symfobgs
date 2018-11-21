@@ -1,9 +1,14 @@
-<div class="row">
-    <div class="col-3">    
-        <img src="{{ oferta.getJuego.getUrlPortada }}" class="img-thumbnail"></img>
+<div class="card" style="max-width: 50%;" >
+    <img src="{{ oferta.getJuego.getUrlPortada }}" class="card-img-top"></img>
+    <div class="card-body">    
+    <h3 class="card-title">{{ oferta.getJuego.getTitulo}}</h3>
+    <div class="btn-group" role="group">
+        <button onclick="window.location.href='/'" type="button" class="btn btn-success">Marcar vendido</button>
+        <button onclick="window.location.href='/'" type="button" class="btn btn-secondary">Editar</button>
+        <button onclick="window.location.href='/'" type="button" class="btn btn-danger">Eliminar</button>
     </div>
-    <div class="col-6">
-        <h3>{{ oferta.getJuego.getTitulo}}</h3>
-        {{ oferta.getComentario}}
+    
+    <p class="card-text">{{ oferta.getComentario}}</p>
+    <p class="card-text small">Publicado el {{ oferta.getFechaCreacion|date('d-m-Y')}} </p>
     </div>
 </div>
