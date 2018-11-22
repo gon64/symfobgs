@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+
+
+
+<div class="blog-test" id="geolocation-test">No se ha permitido el acceso a la posición del usuario.</div>
+
+<script>
+
+(function(){
+	var content = document.getElementById("geolocation-test");
+
+	if (navigator.geolocation)
+	{
+		navigator.geolocation.getCurrentPosition(function(objPosition)
+		{
+			var lon = objPosition.coords.longitude;
+			var lat = objPosition.coords.latitude;
+
+			content.innerHTML = "<p><strong>Latitud:</strong> " + lat + "</p><p><strong>Longitud:</strong> " + lon + "</p>";
+
+		}, function(objPositionError)
+		{
+			switch (objPositionError.code)
+			{
+				case objPositionError.PERMISSION_DENIED:
+					content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+				break;
+				case objPositionError.POSITION_UNAVAILABLE:
+					content.innerHTML = "No se ha podido acceder a la información de su posición.";
+				break;
+				case objPositionError.TIMEOUT:
+					content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+				break;
+				default:
+					content.innerHTML = "Error desconocido.";
+			}
+		}, {
+			maximumAge: 75000,
+			timeout: 15000
+		});
+	}
+	else
+	{
+		content.innerHTML = "Su navegador no soporta la API de geolocalización.";
+	}
+})();
+</script>
+
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+
+    <div id="map" style="height: 100%"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIGdDXhpRn6k0tXY7TeZS2OTq7LL1ECmE&callback=initMap"
+    async defer></script>
+
+
+
+
+
+
+
+{% endblock %}

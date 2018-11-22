@@ -49,9 +49,15 @@ class Usuario implements UserInterface, \Serializable
      */
     private $ofertas;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fecha_creacion;
+
     public function __construct()
     {
         $this->ofertas = new ArrayCollection();
+        $this->fecha_creacion = new DateTime(); 
     }
 
     public function getId()
@@ -193,6 +199,18 @@ class Usuario implements UserInterface, \Serializable
                     $this->email,
 		    $this->clave
 	    ) = unserialize($string, ['allowed_classes' => false]);
+    }
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fecha_creacion;
+    }
+
+    public function setFechaCreacion(?\DateTimeInterface $fecha_creacion): self
+    {
+        $this->fecha_creacion = $fecha_creacion;
+
+        return $this;
     }
 
 }

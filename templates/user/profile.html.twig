@@ -12,12 +12,12 @@
             <div class="col col-md-9">
                 <!-- info --> 
                 <p>email: <a href="{{ usuario.email }}">{{ usuario.email }}</a>
-                <p>Usuario desde:
-                <p>Ubicación:
+                <p>Usuario desde: {{ usuario.getFechaCreacion|date('d-m-Y') }}
+                <p>Ubicación: [[NO IMPLEMENTADO AUN]] <button onclick="window.location.href='/'" type="button" class="btn btn-secondary btn-sm">editar</button>
                 <p><button onclick="window.location.href='/'" type="button" class="btn btn-warning">Cambiar contraseña</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:15px">
         {% if usuario.getOfertas is empty %}
             <div class="row">
                 <div class="col col-12">
@@ -27,7 +27,7 @@
         {% else %}
             <div class="row">
                 <div class="col col-12">
-                    <h2>En venta: </h2>
+                    <h2>Juegos en venta de {{ usuario.usuario }}: </h2>
                 </div>
             </div>
             
