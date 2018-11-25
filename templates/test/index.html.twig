@@ -4,75 +4,30 @@
 
 {% block body %}
 
+Location: <input type="text" id="us2-address" style="width: 200px"/>
+Radius: <input type="text" id="us2-radius"/>
+<div id="us2" style="width: 500px; height: 400px;"></div>
+Lat.: <input type="text" id="us2-lat"/>
+Long.: <input type="text" id="us2-lon"/>
+
 <script>
-
-
-</script>
-    <div id="map" style="height: 500px; width:500px"></div>
-    <script>
-
-    function getPosition(){
-        
-        if (navigator.geolocation)
-        {
-            navigator.geolocation.getCurrentPosition(function(objPosition)
-            {
-                var lon = objPosition.coords.longitude;
-                var lat = objPosition.coords.latitude;
-
-                var position = [lat,lon];
-
-                console.log("Latitud: " + lat + " Longitud: " + lon);
-                console.log("1");
-                console.log(position);
-
-                return position;
-
-            }, function(objPositionError)
-            {
-                switch (objPositionError.code)
-                {
-                    case objPositionError.PERMISSION_DENIED:
-                        console.log("No se ha permitido el acceso a la posición del usuario.");
-                    break;
-                    case objPositionError.POSITION_UNAVAILABLE:
-                        console.log("No se ha podido acceder a la información de su posición.");
-                    break;
-                    case objPositionError.TIMEOUT:
-                        console.log("El servicio ha tardado demasiado tiempo en responder.");
-                    break;
-                    default:
-                        console.log("Error desconocido.");
-                }
-            }, {
-                maximumAge: 75000,
-                timeout: 15000
-            });
-        }
-        else
-        {
-            content.innerHTML = "Su navegador no soporta la API de geolocalización.";
-        }
+$('#us2').locationpicker({
+    location: {
+        latitude: 46.15242437752303,
+        longitude: 2.7470703125
+    },
+    radius: 300,
+    inputBinding: {
+        latitudeInput: $('#us2-lat'),
+        longitudeInput: $('#us2-lon'),
+        radiusInput: $('#us2-radius'),
+        locationNameInput: $('#us2-address')
+    },
+    enableAutocomplete: true,
+    autocompleteOptions: {
+       
+        componentRestrictions: {country: 'es'}
     }
-    var map;
-    function initMap() {
-        var position = getPosition();
-        console.log("2");
-        console.log(position);
-        
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: position[0], lng: position[1]},
-            zoom: 8
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIGdDXhpRn6k0tXY7TeZS2OTq7LL1ECmE&callback=initMap"
-    async defer></script>
-
-
-
-
-
-
-
+});
+</script>
 {% endblock %}
