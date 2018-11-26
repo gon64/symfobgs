@@ -13,8 +13,12 @@
                 <!-- info --> 
                 <p>email: <a href="{{ usuario.email }}">{{ usuario.email }}</a>
                 <p>Usuario desde: {{ usuario.getFechaCreacion|date('d-m-Y') }}
-                <p>Ubicación: [[NO IMPLEMENTADO AUN]] <button onclick="window.location.href='/'" type="button" class="btn btn-secondary btn-sm">editar</button>
-                <p><button onclick="window.location.href='/'" type="button" class="btn btn-warning">Cambiar contraseña</button>
+                <p>Ubicación: <span id="profile-address-location"> {{ usuario.dir }} </span> 
+                {% if app.user.username == usuario.usuario %}
+                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">editar</button>
+                    <p><button onclick="window.location.href='/'" type="button" class="btn btn-warning">Cambiar contraseña</button>
+                {% endif %}
+                
             </div>
         </div>
         <div class="row" style="margin-top:15px">
@@ -46,6 +50,7 @@
         {% endif %}
         </div>
     </div>
+    {% include 'location/modal.html.twig' with {'lat': usuario.lat|default(0), 'lon': usuario.lon|default(0) } %}
 
 {% endblock %}
 

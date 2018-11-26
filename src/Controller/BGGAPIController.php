@@ -73,15 +73,9 @@ class BGGAPIController extends Controller {
 			$em->persist($juego);
 			$em->flush();
         }
-		//$jsonContent = $serializer->serialize($juego, 'json');
-		//return $jsonContent;		
+
 		return $this->json($juego);
 
-		/*
-		$json = json_encode($xml);
-                $array = json_decode($json,true);
-		return $this->json($array);
-		*/
 	}
 }
 

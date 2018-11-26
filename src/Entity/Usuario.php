@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
@@ -53,6 +54,21 @@ class Usuario implements UserInterface, \Serializable
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $fecha_creacion;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dir;
+
+    /**
+     * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
+     */
+    private $lon;
 
     public function __construct()
     {
@@ -209,6 +225,42 @@ class Usuario implements UserInterface, \Serializable
     public function setFechaCreacion(?\DateTimeInterface $fecha_creacion): self
     {
         $this->fecha_creacion = $fecha_creacion;
+
+        return $this;
+    }
+
+    public function getDir(): ?string
+    {
+        return $this->dir;
+    }
+
+    public function setDir(?string $dir): self
+    {
+        $this->dir = $dir;
+
+        return $this;
+    }
+
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    public function setLat($lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon()
+    {
+        return $this->lon;
+    }
+
+    public function setLon($lon): self
+    {
+        $this->lon = $lon;
 
         return $this;
     }
