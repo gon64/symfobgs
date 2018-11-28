@@ -27,6 +27,17 @@ class Oferta
      */
     private $ubicacion;
 
+
+    /**
+     * @ORM\Column(type="string", length=1255, nullable=true)
+     */
+    private $comentario;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fecha_creacion;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Juego", inversedBy="ofertas")
      * @ORM\JoinColumn(nullable=false)
@@ -38,16 +49,6 @@ class Oferta
      * @ORM\JoinColumn(nullable=false)
      */
     private $usuario;
-
-    /**
-     * @ORM\Column(type="string", length=1255, nullable=true)
-     */
-    private $comentario;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $fecha_creacion;
 
     public function __construct()
     {
@@ -83,30 +84,6 @@ class Oferta
         return $this;
     }
 
-    public function getJuego(): ?Juego
-    {
-        return $this->juego;
-    }
-
-    public function setJuego(?Juego $juego): self
-    {
-        $this->juego = $juego;
-
-        return $this;
-    }
-
-    public function getUsuario(): ?Usuario
-    {
-        return $this->usuario;
-    }
-
-    public function setUsuario(?Usuario $usuario): self
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
     public function getComentario(): ?string
     {
         return $this->comentario;
@@ -127,6 +104,30 @@ class Oferta
     public function setFechaCreacion(\DateTimeInterface $fecha_creacion): self
     {
         $this->fecha_creacion = $fecha_creacion;
+
+        return $this;
+    }
+
+    public function getJuego(): ?Juego
+    {
+        return $this->juego;
+    }
+
+    public function setJuego(?Juego $juego): self
+    {
+        $this->juego = $juego;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuario
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuario $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }

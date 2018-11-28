@@ -46,11 +46,6 @@ class Usuario implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Oferta", mappedBy="usuario")
-     */
-    private $ofertas;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $fecha_creacion;
@@ -70,9 +65,14 @@ class Usuario implements UserInterface, \Serializable
      */
     private $lon;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Oferta", mappedBy="usuario")
+     */
+    private $ofertas;
+
     public function __construct()
     {
-        $this->ofertas = new ArrayCollection();
+        //$this->ofertas = new ArrayCollection();
         $this->fecha_creacion = new DateTime(); 
     }
 
@@ -141,36 +141,6 @@ class Usuario implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return Collection|Oferta[]
-     */
-    public function getOfertas(): Collection
-    {
-        return $this->ofertas;
-    }
-
-    public function addOferta(Oferta $oferta): self
-    {
-        if (!$this->ofertas->contains($oferta)) {
-            $this->ofertas[] = $oferta;
-            $oferta->setUsuario($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOferta(Oferta $oferta): self
-    {
-        if ($this->ofertas->contains($oferta)) {
-            $this->ofertas->removeElement($oferta);
-            // set the owning side to null (unless already changed)
-            if ($oferta->getUsuario() === $this) {
-                $oferta->setUsuario(null);
-            }
-        }
-
-        return $this;
-    }
 
     /*
      * Metodos de la interfaz UserInterface
@@ -261,6 +231,37 @@ class Usuario implements UserInterface, \Serializable
     public function setLon($lon): self
     {
         $this->lon = $lon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Oferta[]
+     */
+    public function getOfertas(): Collection
+    {
+        return $this->ofertas;
+    }
+
+    public function addOferta(Oferta $oferta): self
+    {
+        if (!$this->ofertas->contains($oferta)) {
+            $this->ofertas[] = $oferta;
+            $oferta->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOferta(Oferta $oferta): self
+    {
+        if ($this->ofertas->contains($oferta)) {
+            $this->ofertas->removeElement($oferta);
+            // set the owning side to null (unless already changed)
+            if ($oferta->getUsuario() === $this) {
+                $oferta->setUsuario(null);
+            }
+        }
 
         return $this;
     }

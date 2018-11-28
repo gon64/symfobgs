@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,16 @@ class Juego
      * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Oferta", mappedBy="juego")
+     */
+    private $ofertas;
+
+    public function __construct()
+    {
+        $this->ofertas = new ArrayCollection();
+    }
 
     
 
@@ -155,6 +167,37 @@ class Juego
     public function setAge(?int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Oferta[]
+     */
+    public function getOfertas(): Collection
+    {
+        return $this->ofertas;
+    }
+
+    public function addOferta(Oferta $oferta): self
+    {
+        if (!$this->ofertas->contains($oferta)) {
+            $this->ofertas[] = $oferta;
+            $oferta->setJuego($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOferta(Oferta $oferta): self
+    {
+        if ($this->ofertas->contains($oferta)) {
+            $this->ofertas->removeElement($oferta);
+            // set the owning side to null (unless already changed)
+            if ($oferta->getJuego() === $this) {
+                $oferta->setJuego(null);
+            }
+        }
 
         return $this;
     }
