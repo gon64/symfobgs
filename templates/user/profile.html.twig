@@ -11,7 +11,7 @@
             </div>
             <div class="col col-md-9">
                 <!-- info --> 
-                <p>email: <a href="{{ usuario.email }}">{{ usuario.email }}</a>
+                <p>email: <a href="mailto:{{ usuario.email }}" target="_blank">{{ usuario.email }}</a>
                 <p>Usuario desde: {{ usuario.getFechaCreacion|date('d-m-Y') }}
                 <p>Ubicación: <span id="profile-address-location"> {{ usuario.dir }} </span> 
                 {% if app.user.username == usuario.usuario %}
@@ -22,13 +22,13 @@
             </div>
         </div>
         <div class="row" style="margin-top:15px">
-        {% if usuario.getOfertas is empty %}
+        {% if usuario.getOfertas is empty and app.user.username == usuario.usuario%}
             <div class="row">
                 <div class="col col-12">
                     <h2>Aún no tienes ningún juego en venta, <a href="/juego/nuevo">publica una oferta ahora</a> </h2>
                 </div>
             </div>
-        {% else %}
+        {% elseif  usuario.getOfertas is not empty %}
             <div class="row">
                 <div class="col col-12">
                     <h2>Juegos en venta de {{ usuario.usuario }}: </h2>
@@ -36,17 +36,21 @@
             </div>
             
             
-            {% for ofertas in usuario.getOfertas|batch(3) %}
+            {% for ofertas in usuario.getOfertas|batch(3, null) %}
                 <div class="card-deck" style="margin-bottom:15px">
                     {% for oferta in ofertas %}
-                        {% include 'user/selling.html.twig' %}
-                        <!--{{ oferta.getComentario }}-->
+                            {% include 'user/selling.html.twig' %}
                     {% endfor %}
                     
-                </div>
-                
+                </div>    
             {% endfor %}
-            
+
+        {% else %}    
+            <div class="row">
+                <div class="col col-12">
+                    <h2>{{ usuario.usuario }} no tiene ningún juego a la venta en este momento </h2>
+                </div>
+            </div>
         {% endif %}
         </div>
     </div>

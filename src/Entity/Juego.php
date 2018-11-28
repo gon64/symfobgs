@@ -56,6 +56,8 @@ class Juego
      */
     private $age;
 
+    
+
     public function getId()
     {
         return $this->id;
