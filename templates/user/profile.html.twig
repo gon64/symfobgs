@@ -21,8 +21,8 @@
                 
             </div>
         </div>
-        <div class="row" style="margin-top:15px">
-        {% if usuario.getOfertas is empty and app.user.username == usuario.usuario%}
+        <div class="row" style="margin-top:15px"></div>
+        {% if usuario.getOfertas is empty and app.user.username == usuario.usuario %}
             <div class="row">
                 <div class="col col-12">
                     <h2>Aún no tienes ningún juego en venta, <a href="/juego/nuevo">publica una oferta ahora</a> </h2>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             
-            
+            <div class="row">
             {% for ofertas in usuario.getOfertas|batch(3, null) %}
                 <div class="card-deck" style="margin-bottom:15px">
                     {% for oferta in ofertas %}

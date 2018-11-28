@@ -63,6 +63,8 @@ class OfferController extends AbstractController {
 				$oferta->setPrecio($request->get('game-price-input'));
 				$oferta->setComentario($request->get('game-description-input'));
 				$oferta->setUsuario($this->getUser());
+				$oferta->setGameStatus($request->get('status-input'));
+				$oferta->setSleeveStatus($request->get('sleeves-input'));
 				$oferta->setJuego(
 					$this->getDoctrine()
 						->getRepository(Juego::class)
@@ -75,6 +77,11 @@ class OfferController extends AbstractController {
 				$em->persist($oferta);
 				$em->flush();
 
+				return $this->render(
+					'user/profile.html.twig', [
+						'usuario' => $this->getUser()
+					]
+				);
 
 			default: 
 				break;

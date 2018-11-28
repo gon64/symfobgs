@@ -50,6 +50,16 @@ class Oferta
      */
     private $usuario;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $game_status;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $sleeve_status;
+
     public function __construct()
     {
         $this->fecha_creacion = new DateTime(); 
@@ -128,6 +138,30 @@ class Oferta
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getGameStatus(): ?int
+    {
+        return $this->game_status;
+    }
+
+    public function setGameStatus(int $game_status): self
+    {
+        $this->game_status = $game_status;
+
+        return $this;
+    }
+
+    public function getSleeveStatus(): ?int
+    {
+        return $this->sleeve_status;
+    }
+
+    public function setSleeveStatus(int $sleeve_status): self
+    {
+        $this->sleeve_status = $sleeve_status;
 
         return $this;
     }
