@@ -1,66 +1,71 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="row">
-    <div class="col-md-9">
-		<h2>{{ juego.titulo }}</h2>
-		<form action="/oferta/nuevo/2" method="post">
-			<input type="hidden" name="game-id" value="{{juego.id}}"></input>
-			<div class="form-group row">
-				<label for="game-price-input" class="col-sm-2 col-form-label">Precio:</label>
-				<div class="col-md-9">
-					<div class="input-group">
-						<input type="number" name="game-price-input" min="0.00" step="0.01" class="form-control" id="game-price-input" placeholder="Precio" autocomplete="off" required="required"></input>
-						<div class="input-group-append">
-							<span class="input-group-text">€</span>
+<div class= "container">
+	<div class="progress" style="margin-bottom: 15px">
+		<div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<h2>{{ juego.titulo }}</h2>
+			<form action="/oferta/nuevo/2" method="post">
+				<input type="hidden" name="game-id" value="{{juego.id}}"></input>
+				<div class="form-group row">
+					<label for="game-price-input" class="col-sm-2 col-form-label">Precio:</label>
+					<div class="col-md-9">
+						<div class="input-group">
+							<input type="number" name="game-price-input" min="0.00" step="0.01" class="form-control" id="game-price-input" placeholder="Precio" autocomplete="off" required="required"></input>
+							<div class="input-group-append">
+								<span class="input-group-text">€</span>
+							</div>
 						</div>
 					</div>
+					<label for="game-description-input" class="col-sm-2 col-form-label">Comentarios: </label>
+					<div class="col-md-9">
+						<textarea name="game-description-input" class="form-control" id="game-description-input" rows="5" placeholder="Comentarios" autocomplete="off" required="required"></textarea>
+					</div>
+					
 				</div>
-				<label for="game-description-input" class="col-sm-2 col-form-label">Comentarios: </label>
-				<div class="col-md-9">
-					<textarea name="game-description-input" class="form-control" id="game-description-input" rows="5" placeholder="Comentarios" autocomplete="off" required="required"></textarea>
+				<div class="row">
+					<legend class="col-form-label col-sm-2 pt-0">Estado:</legend>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="status-input" id="status1" value="0">
+						<label class="form-check-label" for="inlineRadio1">Sin abrir</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="status-input" id="status2" value="1" checked>
+						<label class="form-check-label" for="inlineRadio2">Nuevo</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="status-input" id="status3" value="2">
+						<label class="form-check-label" for="inlineRadio1">Usado</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="status-input" id="status4" value="3">
+						<label class="form-check-label" for="inlineRadio2">Deteriorado</label>
+					</div>
 				</div>
-				
-			</div>
-			<div class="row">
-				<legend class="col-form-label col-sm-2 pt-0">Estado:</legend>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="status-input" id="status1" value="0">
-					<label class="form-check-label" for="inlineRadio1">Sin abrir</label>
+				<div class="row">
+					<legend class="col-form-label col-sm-2 pt-0">Enfundado:</legend>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves1" value="2">
+						<label class="form-check-label" for="inlineRadio1">Completamente</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves2" value="1">
+						<label class="form-check-label" for="inlineRadio2">Parcialmente</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves3" value="0" checked>
+						<label class="form-check-label" for="inlineRadio1">No</label>
+					</div>
 				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="status-input" id="status2" value="1" checked>
-					<label class="form-check-label" for="inlineRadio2">Nuevo</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="status-input" id="status3" value="2">
-					<label class="form-check-label" for="inlineRadio1">Usado</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="status-input" id="status4" value="3">
-					<label class="form-check-label" for="inlineRadio2">Deteriorado</label>
-				</div>
-			</div>
-			<div class="row">
-				<legend class="col-form-label col-sm-2 pt-0">Enfundado:</legend>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves1" value="2">
-					<label class="form-check-label" for="inlineRadio1">Completamente</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves2" value="1">
-					<label class="form-check-label" for="inlineRadio2">Parcialmente</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="sleeves-input" id="sleeves3" value="0" checked>
-					<label class="form-check-label" for="inlineRadio1">No</label>
-				</div>
-			</div>
-			<button type="submit" class="btn btn-primary">Continuar</button>
-		</form>
-	</div>
+				<button type="submit" class="btn btn-primary">Continuar</button>
+			</form>
+		</div>
 
-	<div class="col-md-3">
-		{% include 'juego/infocard.html.twig' %}
+		<div class="col-md-3">
+			{% include 'juego/infocard.html.twig' %}
+		</div>
 	</div>
 </div>
 <script src="{{ asset('js/juego.js') }}" type="text/javascript"></script>

@@ -26,11 +26,11 @@
                                     <span class="badge badge-warning">deteriorado</span> 
                             {% endif %}
                         </h5> 
-                        <p class="card-text">{{ oferta.getComentario[:50] ~ '...' }}</p>
+                        <p>{{ oferta.getComentario|nl2br }}</p>
                         
                         <h3>
-                            <span class="badge badge-success">{{ oferta.precio }} €</span>
                             <a href="/user/{{ oferta.usuario.usuario }}" class="btn btn-primary">Contactar con {{ oferta.usuario.usuario }}</a>
+                            <span class="badge badge-success">{{ oferta.precio }} €</span>
                         </h3>
                         <p class="card-text small">Publicado el {{ oferta.getFechaCreacion|date('d-m-Y')}} </p>
                     </div>

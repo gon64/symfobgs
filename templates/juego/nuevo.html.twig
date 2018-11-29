@@ -1,27 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="row">
-	<div class="col-md-9">
-		<form name="nuevo_juego" action="/oferta/nuevo/1" method="post">
-			<div class="form-group row">
-				<label for="search-game-input" class="col-sm-2 col-form-label">Buscar juego</label>
-				<div class="col-md-9">
-					<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego" autocomplete="off"></input>
-				</div>
-
-				<label for="search-game-select" class="col-sm-2 col-form-label">Elegir resultado</label>
-				<div class="col-md-9">
-					<select class="form-control" id="search-game-select"></select>
-					<input type="submit" value="Seleccionar" id="select-game-btn" class="btn btn-primary btn-lg btn-block disabled" disabled="disabled"></input>
-				</div>
-			</div>
-			<input type="hidden" name="bgg_id" id="bgg_id" />
-			<input type="hidden" name="img_url" id="img_url" />
-			<input type="hidden" name="bg_name" id="bg_name" />
-		</form>
+	
+<div class="container">
+	<div class="progress" style="margin-bottom: 15px">
+		<div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
-	<div class="col-md-3">
-		{% include 'juego/infocard.html.twig' %}
+	<div class="row">
+		<div class="col-md-9">
+			<form name="nuevo_juego" action="/oferta/nuevo/1" method="post">
+				<div class="form-group row">
+					<label for="search-game-input" class="col-sm-2 col-form-label">Buscar juego</label>
+					<div class="col-md-9">
+						<input type="text" class="form-control" id="search-game-input" placeholder="Titulo del juego" autocomplete="off"></input>
+					</div>
+
+					<label for="search-game-select" class="col-sm-2 col-form-label">Elegir resultado</label>
+					<div class="col-md-9">
+						<select class="form-control" id="search-game-select"></select>
+						<input type="submit" value="Seleccionar" id="select-game-btn" class="btn btn-primary btn-lg btn-block disabled" disabled="disabled"></input>
+					</div>
+				</div>
+				<input type="hidden" name="bgg_id" id="bgg_id" />
+				<input type="hidden" name="img_url" id="img_url" />
+				<input type="hidden" name="bg_name" id="bg_name" />
+			</form>
+		</div>
+		<div class="col-md-3">
+			{% include 'juego/infocard.html.twig' %}
+		</div>
 	</div>
 </div>
 <script src="{{ asset('js/juego.js') }}" type="text/javascript"></script>

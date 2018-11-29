@@ -58,30 +58,44 @@ class OfferController extends AbstractController {
 				);
 		
 			case 2:
-				
+				$juego = $this->getDoctrine()
+					->getRepository(Juego::class)
+					->findOneBy([
+						'id' => $request->get('game-id')
+				]);
 				$oferta = new Oferta();
 				$oferta->setPrecio($request->get('game-price-input'));
 				$oferta->setComentario($request->get('game-description-input'));
 				$oferta->setUsuario($this->getUser());
 				$oferta->setGameStatus($request->get('status-input'));
 				$oferta->setSleeveStatus($request->get('sleeves-input'));
-				$oferta->setJuego(
-					$this->getDoctrine()
-						->getRepository(Juego::class)
-						->findOneBy([
-							'id' => $request->get('game-id')
-					])
-				);
+				$oferta->setJuego($juego);
 				
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($oferta);
 				$em->flush();
 
 				return $this->render(
+					'offer/select_location.html.twig', [
+						'usuario' => $this->getUser(),
+						'juego' => $juego,
+						'oferta' => $oferta
+					]
+				);
+
+				/*
+				return $this->render(
 					'user/profile.html.twig', [
 						'usuario' => $this->getUser()
 					]
-				);
+				);*/
+
+			/*
+			case 3:
+
+			return $this->render(
+				''
+			);*/
 
 			default: 
 				break;
