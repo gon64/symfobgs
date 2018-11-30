@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Oferta;
 use App\Entity\Juego;
+use App\Constant\Game_Languages;
 
 
 class OfferController extends AbstractController {
@@ -41,10 +42,10 @@ class OfferController extends AbstractController {
 	 * @Route("/oferta/nuevo/{step}")
 	 */
 	public function nuevaOfertaAction(Request $request, $step = 1) {
+		$em = $this->getDoctrine()->getManager();
 		switch ( $step ) {
 			case 1:
-				$em = $this->getDoctrine()->getManager();
-				
+								
 				$juego = $this->getDoctrine()
 					->getRepository(Juego::class)
 					->findOneBy([
@@ -70,8 +71,18 @@ class OfferController extends AbstractController {
 				$oferta->setGameStatus($request->get('status-input'));
 				$oferta->setSleeveStatus($request->get('sleeves-input'));
 				$oferta->setJuego($juego);
+				$oferta->setLat($this->getUser()->getLat());
+				$oferta->setLon($this->getUser()->getLon());
 				
-				$em = $this->getDoctrine()->getManager();
+				// usamos una mascara de bits para determinar los idiomas
+				$languages = Game_Languages::UNSPECIFIED;
+				foreach ($request->get('language-input') as $language) {
+					$languages = $languages | $language;
+				}
+				$oferta->setLanguages($languages);
+				
+
+				
 				$em->persist($oferta);
 				$em->flush();
 
@@ -83,19 +94,27 @@ class OfferController extends AbstractController {
 					]
 				);
 
-				/*
-				return $this->render(
-					'user/profile.html.twig', [
-						'usuario' => $this->getUser()
-					]
-				);*/
-
-			/*
 			case 3:
+				
+			$oferta = $this->getDoctrine()
+				->getRepository(Oferta::class)
+				->findOneBy([
+					'id' => $request->get('oferta-id')
+			]);
 
+			$oferta->setLat($request->get('locationpicker-lat'));
+			$oferta->setLon($request->get('locationpicker-lon'));
+
+			$em->persist($oferta);
+			$em->flush();
+	
 			return $this->render(
-				''
-			);*/
+				'user/profile.html.twig', [
+					'usuario' => $this->getUser()
+				]
+			);
+
+
 
 			default: 
 				break;

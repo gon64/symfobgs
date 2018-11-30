@@ -60,6 +60,21 @@ class Oferta
      */
     private $sleeve_status;
 
+    /**
+     * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="decimal", precision=20, scale=16, nullable=true)
+     */
+    private $lon;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $languages;
+
     public function __construct()
     {
         $this->fecha_creacion = new DateTime(); 
@@ -164,5 +179,45 @@ class Oferta
         $this->sleeve_status = $sleeve_status;
 
         return $this;
+    }
+
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    public function setLat($lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon()
+    {
+        return $this->lon;
+    }
+
+    public function setLon($lon): self
+    {
+        $this->lon = $lon;
+
+        return $this;
+    }
+
+    public function getLanguages(): ?int
+    {
+        return $this->languages;
+    }
+
+    public function setLanguages(int $languages): self
+    {
+        $this->languages = $languages;
+
+        return $this;
+    }
+
+    public function hasLanguage(int $language){
+        return $this->languages & $language;
     }
 }

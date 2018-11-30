@@ -12,9 +12,9 @@
             <div class="col col-md-9">
                 <!-- info --> 
                 <p>email: <a href="mailto:{{ usuario.email }}" target="_blank">{{ usuario.email }}</a>
-                <p>Usuario desde: {{ usuario.getFechaCreacion|date('d-m-Y') }}
-                <p>Ubicación: <span id="profile-address-location"> {{ usuario.dir }} </span> 
+                <p>Usuario desde: {{ usuario.getFechaCreacion|date('d-m-Y') }}                
                 {% if app.user.username == usuario.usuario %}
+                    <p>Ubicación: <span id="profile-address-location"> {{ usuario.dir }} </span> 
                     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">editar</button>
                     <p><button onclick="window.location.href='/'" type="button" class="btn btn-warning">Cambiar contraseña</button>
                 {% endif %}
